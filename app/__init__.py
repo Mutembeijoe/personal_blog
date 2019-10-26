@@ -21,7 +21,9 @@ def create_app(config_name):
     login_manager.init_app(app)
 
     from app.main.routes import main
-    app.register_blueprint(main)
+    from app.users.routes import users
 
+    app.register_blueprint(main)
+    app.register_blueprint(users)
 
     return app
