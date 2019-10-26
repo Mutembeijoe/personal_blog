@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, flash, redirect, url_for,request
-from app.users.forms import RegistrationForm
+from app.users.forms import RegistrationForm, LoginForm
 from app import bcrypt,db
 from app.models import User
 from flask_login import login_user,current_user
@@ -16,7 +16,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f'Account was successfully created, you can now login!', "success")
-        return redirect(url_for('main.home'))
+        return redirect(url_for('users.home'))
     return render_template('register.html', form = form )
 
 @users.route("/login", methods = ['GET', 'POST'])
