@@ -2,13 +2,15 @@ from flask import Blueprint, render_template, flash, redirect, url_for,request
 from app.users.forms import RegistrationForm, LoginForm
 from app import bcrypt,db
 from app.models import User
-from flask_login import login_user,current_user
+from flask_login import login_user,current_user,logout_user
 
 
 users = Blueprint('users', __name__)
 
 @users.route('/register', methods = ['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('main.home'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -16,7 +18,7 @@ def register():
         db.session.add(user)
         db.session.commit()
         flash(f'Account was successfully created, you can now login!', "success")
-        return redirect(url_for('users.home'))
+        return redirect(url_for('users.login'))
     return render_template('register.html', form = form )
 
 @users.route("/login", methods = ['GET', 'POST'])
@@ -33,3 +35,8 @@ def login():
         else:
             flash('Login Unsuccessful. Invalid email or password', 'danger')
     return render_template('login.html', form = form)
+
+@users.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('main.home'))
