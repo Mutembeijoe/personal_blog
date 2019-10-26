@@ -10,3 +10,12 @@ login_manager.login_view = 'users.login'
 login_manager.login_message_category = 'info'
 
 
+
+def create_app():
+    app = Flask(__name__)
+
+    db.init_app(app)
+    bcrypt.init_app(app)
+    login_manager.init_app(app)
+
+    return app
