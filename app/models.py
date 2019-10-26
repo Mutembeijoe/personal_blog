@@ -19,10 +19,10 @@ class Post(db.Model):
     title = db.Column(db.String(100),nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default= datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
-    user_id = db.Column(db.Integer,db.ForeignKey('user.id'), nullable=False)
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'), nullable=False)
     upvote = db.Column(db.Integer, nullable=False, default = 0)
     downvote = db.Column(db.Integer, nullable=False, default = 0)
-    comments = db.relationship('Comment', backref='pitch', lazy=True)
+    comments = db.relationship('Comment', backref='post', lazy=True)
 
     def __repr__(self):
         return f"Post('{self.title}','{self.date_posted}')"
@@ -31,7 +31,7 @@ class Post(db.Model):
 class Comment(db.Model):
     __tablename__ ='comments'
     id = db.Column(db.Integer, primary_key=True)
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'), nullable=False)
+    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     description = db.Column(db.Text, nullable=False)
 
