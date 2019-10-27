@@ -4,7 +4,7 @@
          <div>
             <div class="card my-5" style="max-width: 700px;">
               <div class="card-header">
-                <h5 class="card-title">{{ post.title }}</h5>
+                <h5 class="card-title"><a href="{{url_for('posts.post', post_id = post.id)}}">{{ post.title }}</a></h5>
               </div>
               <div class="card-body">
                   <p class="card-text">{{post.content}}</p>
