@@ -1,31 +1,25 @@
 {% extends 'layout.html'%}
 {%block content%}
  <div>
-    <div class="card my-5" style="max-width: 700px;">
-      <div class="card-header">
-        <h5 class="card-title">{{ post.title }}</h5>
-      </div>
-      <div class="card-body">
-          <p class="card-text">{{post.content}}</p>
+      {% if post.author == current_user %}
           <div>
-            <a href="#" class="btn btn-outline-primary d-inline mr-3">Comment</a>
-            <h4 class="card-text d-inline mr-3"><small class="text-muted"><a href="#"><i class="fa fa-thumbs-up"></i></a> {{ post.upvote }}</small></h4>
-            <h4 class="card-text d-inline mr-3"><small class="text-muted"><a href="#"><i class="fa fa-thumbs-down"></i></a> {{ post.downvote }}</small></h4>
-            {% if post.author == current_user %}
-              <div>
-                <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a>
-                <button type="button" class="btn btn-danger btn-sm m-1" data-toggle="modal" data-target="#deleteModal">Delete</button>
-              </div>
-            {% endif %}
+            <a class="d-inline btn btn-secondary btn-sm mr-4" href="{{ url_for('posts.update_post', post_id=post.id) }}">Update</a>
+            <button type="button" class=" d-inline btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal">Delete</button>
           </div>
-      </div>
-    </div>
+     {% endif %}
+     <header>
+         <h1>{{post.title}}</h1>
+         <p class="text-muted h5">{{post.summary}}</p>
+     </header>
+     <div>
+         <p>{{post.content}}</p>
+     </div>
  </div>
  <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="deleteModalLabel">Delete Post?</h5>
+          <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete this post? </h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
