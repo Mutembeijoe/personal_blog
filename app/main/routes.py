@@ -8,4 +8,5 @@ main = Blueprint('main',__name__)
 @main.route('/home')
 def home():
     posts = Post.query.all()
+    # avatar = url_for('static', filename=f'profile_pics/{current_user.image_file}')
     return render_template('home.html', posts=posts, title = 'Home')

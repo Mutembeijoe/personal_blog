@@ -1,3 +1,4 @@
+
 from app import db
 from datetime import datetime
 from app import login_manager
@@ -25,6 +26,8 @@ class Post(db.Model):
     title = db.Column(db.String(100),nullable=False)
     date_posted = db.Column(db.DateTime, nullable=False, default= datetime.utcnow)
     content = db.Column(db.Text, nullable=False)
+    image_file = db.Column(db.String(20), nullable=False)
+    category = db.Column(db.String, nullable=False)
     user_id = db.Column(db.Integer,db.ForeignKey('users.id'), nullable=False)
     upvote = db.Column(db.Integer, nullable=False, default = 0)
     downvote = db.Column(db.Integer, nullable=False, default = 0)
