@@ -1,21 +1,25 @@
 {% extends 'layout.html'%}
 {%block content%}
-    {%for post in posts%}
-         <div>
-            <div class="card my-5" style="max-width: 700px;">
-              <div class="card-header">
-                <h5 class="card-title"><a href="{{url_for('posts.post', post_id = post.id)}}">{{ post.title }}</a></h5>
-              </div>
-              <div class="card-body">
-                  <p class="card-text">{{post.content}}</p>
-                  <div>
-                    <a href="#" class="btn btn-outline-primary d-inline mr-3">Comment</a>
-                    <h4 class="card-text d-inline mr-3"><small class="text-muted"><a href="#"><i class="fa fa-thumbs-up"></i></a> {{ post.upvote }}</small></h4>
-                    <h4 class="card-text d-inline mr-3"><small class="text-muted"><a href="#"><i class="fa fa-thumbs-down"></i></a> {{ post.downvote }}</small></h4>
-                    <button class="btn btn-outline-secondary d-inline mr-3">View Comments</button>
+    <div class="row">
+        {%for post in posts%}
+            <div class="col-sm-6">
+                <div class="card mb-3">
+                  <div class="row no-gutters">
+                    <div class="col-lg-5">
+                      <img src="{{url_for('static', filename='blog_pics/'+post.image_file)}}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-lg-7">
+                      <div class="card-body">
+                        <h5 class="card-title">{{post.title}}</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                      </div>
+                    </div>
                   </div>
-              </div>
+                </div>
             </div>
-          </div>
-    {% endfor%}
+        {% endfor%}
+    </div>
+
+
 {% endblock%}
