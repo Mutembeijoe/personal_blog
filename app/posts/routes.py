@@ -1,5 +1,20 @@
-from flask import Blueprint
-
+from flask import Blueprint, flash,redirect,url_for,render_template
+from app.posts.forms import PostForm
+from flask_login import login_required, current_user
+from app.models import Post
+from app import db
 
 posts = Blueprint('posts',__name__)
 
+
+@posts.route('/posts/new', methods =['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(title=form.title.data,content = form.content.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Your post has been created!', 'success')
+        return redirect(url_for('main.home'))
+    return render_template('create_post.html',form = form)
