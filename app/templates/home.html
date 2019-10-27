@@ -1,4 +1,21 @@
 {% extends 'layout.html'%}
 {%block content%}
-<h1>Hello World</h1>
+    {%for post in posts%}
+         <div>
+            <div class="card my-5" style="max-width: 700px;">
+              <div class="card-header">
+                <h5 class="card-title">{{ post.title }}</h5>
+              </div>
+              <div class="card-body">
+                  <p class="card-text">{{post.content}}</p>
+                  <div>
+                    <a href="#" class="btn btn-outline-primary d-inline mr-3">Comment</a>
+                    <h4 class="card-text d-inline mr-3"><small class="text-muted"><a href="#"><i class="fa fa-thumbs-up"></i></a> {{ post.upvote }}</small></h4>
+                    <h4 class="card-text d-inline mr-3"><small class="text-muted"><a href="#"><i class="fa fa-thumbs-down"></i></a> {{ post.downvote }}</small></h4>
+                    <button class="btn btn-outline-secondary d-inline mr-3">View Comments</button>
+                  </div>
+              </div>
+            </div>
+          </div>
+    {% endfor%}
 {% endblock%}
