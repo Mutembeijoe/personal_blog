@@ -17,7 +17,7 @@ def new_post():
         print(form.picture.data)
         if form.picture.data:
             picture_file = save_picture(form.picture.data)
-        post = Post(title=form.title.data,content = form.content.data, category= form.category.data, image_file = picture_file, author=current_user)
+        post = Post(title=form.title.data,content = form.content.data, category= form.category.data, summary = form.summary.data, image_file = picture_file, author=current_user)
         db.session.add(post)
         db.session.commit()
         flash('Your post has been created!', 'success')
@@ -44,6 +44,7 @@ def update_post(post_id):
         post.title = form.title.data
         post.content = form.content.data
         post.category = form.category.data
+        post.summary = form.summary.data
         db.session.commit()
         flash('Your post has been updated!', 'success')
         return redirect(url_for('posts.post', post_id=post.id))
@@ -51,6 +52,7 @@ def update_post(post_id):
         form.title.data = post.title
         form.content.data = post.content
         form.category.data = post.category
+        form.summary.data = post.summary
     return render_template('create_post.html', title='Update Post',
                            form=form, legend='Update Post')
 
