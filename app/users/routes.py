@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, flash, redirect, url_for,request
-from app.users.forms import RegistrationForm, LoginForm
+from app.users.forms import RegistrationForm, LoginForm, UpdateUserForm
 from app import bcrypt,db
 from app.models import User
-from flask_login import login_user,current_user,logout_user
+from flask_login import login_user,current_user,logout_user, login_required
 
+from app.users.utils import save_picture
 
 users = Blueprint('users', __name__)
 
@@ -40,3 +41,23 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('main.home'))
+
+
+@users.route('/account', methods = ['GET','POST'] )
+@login_required
+def account():
+    form = UpdateUserForm()
+    avatar = url_for('static', filename=f'profile_pics/{current_user.image_file}')
+    if form.validate_on_submit():
+        if form.picture.data:
+            picture_file = save_picture(form.picture.data)
+            current_user.image_file = picture_file
+        current_user.username = form.username.data
+        current_user.email = form.email.data
+        db.session.commit()
+        flash(f'Account credentials were successfully updated', "success")
+        return redirect(url_for('users.account'))
+    elif request.method == "GET":
+        form.username.data = current_user.username
+        form.email.data = current_user.email
+    return render_template('account.html', avatar = avatar, form=form)
