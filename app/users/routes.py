@@ -3,6 +3,7 @@ from app.users.forms import RegistrationForm, LoginForm, UpdateUserForm
 from app import bcrypt,db
 from app.models import User
 from flask_login import login_user,current_user,logout_user, login_required
+from app.email import mail_message
 
 from app.users.utils import save_picture
 
@@ -18,6 +19,7 @@ def register():
         user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(user)
         db.session.commit()
+        mail_message("Welcome to the flask Blog","email/welcome_user",user.email,user=user)
         flash(f'Account was successfully created, you can now login!', "success")
         return redirect(url_for('users.login'))
     return render_template('register.html', form = form )
