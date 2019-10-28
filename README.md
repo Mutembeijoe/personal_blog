@@ -14,7 +14,7 @@ Personal_blog is a web application that provides a platform where its users can 
      ```bash
         python manage.py serve
     ```
-* You can view the live version of the app in [Live page]( "Pitch app")
+* You can view the live version of the app in [Live page](https://personal-flask-blog.herokuapp.com "Pitch app")
 
 ## Screenshots
 ![image]()
