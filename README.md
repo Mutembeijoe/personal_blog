@@ -17,7 +17,7 @@ Personal_blog is a web application that provides a platform where its users can 
 * You can view the live version of the app in [Live page](https://personal-flask-blog.herokuapp.com "Pitch app")
 
 ## Screenshots
-![image]()
+![image](https://github.com/Mutembeijoe/personal_blog/blob/master/screenshots/live_site.png)
 
 
 ## Technologies Used
