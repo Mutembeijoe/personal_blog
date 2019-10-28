@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Fredoka+One|Lobster|Saira+Stencil+One&display=swap');
 body {
   background: #fafafa;
   color: #333333;
@@ -7,7 +8,24 @@ body {
 h1, h2, h3, h4, h5, h6 {
   color: #444444;
 }
+.navbar-brand{
+  font-family: 'Lobster', cursive;
+   font-size: 30px;
+}
+#post_title {
+  font-family: 'Fredoka One', cursive;
+}
 
+#post_img{
+  min-width: 400px;
+  max-width: 400px;
+  max-height: 200px;
+  min-height: 200px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin:auto;
+}
 .bg-steel {
   background-color: #5f788a;
 }

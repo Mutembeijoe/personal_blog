@@ -26,9 +26,11 @@ def create_app(config_name):
     from app.main.routes import main
     from app.users.routes import users
     from app.posts.routes import posts
+    from app.comments.routes import comments
 
     app.register_blueprint(main)
     app.register_blueprint(users)
     app.register_blueprint(posts)
+    app.register_blueprint(comments)
 
     return app
